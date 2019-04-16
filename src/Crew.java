@@ -52,6 +52,11 @@ public class Crew {
 
     }
 
+    public String getShipStatus() {
+
+        return this.theShip.toString();
+    }
+
     public String getName() {
         return name;
     }
@@ -123,6 +128,11 @@ public class Crew {
     public void setPiecesFound(int piecesFound) {
         this.piecesFound = piecesFound;
     }
+
+//    @Override
+//    public String toString() {
+//
+//    }
 
 
 }

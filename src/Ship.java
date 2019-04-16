@@ -41,4 +41,11 @@ public class Ship {
     public void setLocation(Planet location) {
         this.location = location;
     }
+
+    public String toString() {
+
+        return String.format("Name: %s, Shields: %d, Location: %s", this.name, this.shields, this.location);
+    }
+
+
 }
