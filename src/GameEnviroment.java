@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class GameEnviroment {
 
     private int totalDays;
-    private int currentDay=0;
+    private int currentDay = 0;
     private int piecesNeeded;
     private int numberOfCrew;
     private Crew crew;
@@ -14,7 +14,7 @@ public class GameEnviroment {
         this.numberOfCrew = numberOfCrew;
         this.crew = new Crew(numberOfCrew, name);
     }
-
+    
     public void callEvent() {
         System.out.println("Event called");
     }
@@ -71,7 +71,54 @@ public class GameEnviroment {
         this.crew = crew;
     }
 
+    public void playGame() {
+    	while (currentDay < totalDays) {
+    		Scanner scanner = new Scanner(System.in);
+            System.out.println(String.format("Activities: \n1.View Crew Status\n2.View Ship Status\n3.Go to Outpost"
+            		+ "\n4.Perform Action\5.Move to next day"));
+            
+            int activity = scanner.nextInt();
+            switch (activity) {
+            	case 1:
+            		this.viewCrewMemberStatus();
+            	case 2:
+            		Engineer newEngineer = new Engineer();
+            		this.crewMemberList.add(newEngineer);
+            		break;
+            	default:
+            		System.out.println("not 1 or 2");
+            		break;
+            }            
+    	}
+    }
+    
+    public void viewCrewMemberStatus(CrewMember member) {
+        
+    }
+    	
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int totalDays = 0;
@@ -106,13 +153,6 @@ public class GameEnviroment {
         
 
         GameEnviroment game = new GameEnviroment(totalDays, piecesNeeded, numberOfCrew, name);
-        Crew crew = game.getCrew();
-        System.out.println(crew.getCrewMemberList().toString());
-        for(CrewMember c : crew.getCrewMemberList()) {
-            System.out.println(String.format("%s actions remaining: %d", c.getName(), c.getActionsRemaining()));
-        }
-        Ship ship = crew.getTheShip();
-        System.out.println(ship.getName());
-        System.out.println(ship.getLocation());
+        game.playGame();              
     }
 }

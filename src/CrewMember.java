@@ -5,10 +5,20 @@ public class CrewMember {
     private int tiredness;
     private boolean hasPlague;
     private int actionsRemaining;
+    private int health;
+    private String searchingSkill;
 
-    public CrewMember() {
+    public CrewMember(int health, String searchingSkill) {
+        this.health = health;
+        this.searchingSkill = searchingSkill;
     }
-
+    
+    public void getStatus(){
+    	System.out.println("Hunger is" + this.getHunger());
+        System.out.println("Tiredness is" + this.getTiredness());
+        System.out.println("Health is" + this.getHealth());
+    }
+    
     public String getName() {
         return name;
     }
@@ -32,7 +42,22 @@ public class CrewMember {
     public void setTiredness(int tiredness) {
         this.tiredness = tiredness;
     }
+    public int getHealth() {
+        return health;
+    }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public String getSearchingSkill() {
+        return searchingSkill;
+    }
+
+    public void setSearchingSkill(String searchingSkill) {
+        this.searchingSkill = searchingSkill;
+    }
+    
     public boolean isHasPlague() {
         return hasPlague;
     }
