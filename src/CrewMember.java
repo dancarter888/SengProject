@@ -5,8 +5,12 @@ public class CrewMember {
     private int tiredness;
     private boolean hasPlague;
     private int actionsRemaining;
+    private int health;
+    private String searchingskill;
 
-    public CrewMember() {
+    public CrewMember(int health, String searchingSkill) {
+        this.health = health;
+        this.searchingSkill = searchingSkill;
     }
 
     public String getName() {
