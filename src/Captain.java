@@ -1,4 +1,3 @@
-//sadsadasd
 public class Captain extends CrewMember{
 
     public Captain() {
