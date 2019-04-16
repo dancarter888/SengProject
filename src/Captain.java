@@ -1,11 +1,8 @@
 //sadsadasd
 public class Captain extends CrewMember{
 
-    private int health = 50;
-    private String searchingSkill = "Bad";
-
     public Captain() {
-        super();
+        super(50, "Bad");
     }
 
     public int getHealth() {
