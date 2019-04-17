@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Planet {
 
@@ -13,9 +14,18 @@ public class Planet {
         System.out.println("Generating Items...");
     }
 
-    public void searchPlanet() {
+    public String searchPlanet(CrewMember member) {
+        // Change when ge items working
         //returns item
+        Random rand = new Random();
+        int number = rand.nextInt(2);
         System.out.println("Searching planet...");
+        String itemFound = null;
+        if(number == 1) {
+            itemFound = "Found item";
+        }
+
+        return itemFound;
     }
 
     public boolean isPartFound() {

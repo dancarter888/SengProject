@@ -6,10 +6,10 @@ public class Crew {
     private String name;
     private int crewSize;
     private ArrayList<CrewMember> crewMemberList = new ArrayList<>();
-    private ArrayList<Item> ownedItems;
+    private ArrayList<Item> ownedItems = new ArrayList<>();
     private ArrayList<CrewMember> crewWithActionsRemaining;
     private ArrayList<CrewMember> crewWithSpacePlague = new ArrayList<>();
-    private int money = 0;
+    private int money = 100;
     private Ship theShip;
     private int piecesFound = 0;
 
@@ -20,6 +20,14 @@ public class Crew {
         System.out.println("Crew: " + crewMemberList.toString());
         this.crewWithActionsRemaining = (ArrayList<CrewMember>) crewMemberList.clone();
         this.theShip = new Ship();
+
+        //test item
+        Apple apple = new Apple();
+        ownedItems.add(apple);
+        SpacePlagueCure cure = new SpacePlagueCure();
+        ownedItems.add(cure);
+        LesserHealing lesser = new LesserHealing();
+        ownedItems.add(lesser);
     }
 
     public void createCrew(int numberOfCrew) {
@@ -50,6 +58,63 @@ public class Crew {
             }
         }
 
+    }
+
+    public void updateCrewWithActionsRemaining() {
+        ArrayList<CrewMember> actionsRemaining = new ArrayList<>();
+
+        for(CrewMember crewMember : this.crewWithActionsRemaining) {
+            if(crewMember.getActionsRemaining() > 0) {
+                actionsRemaining.add(crewMember);
+            }
+        }
+
+        this.crewWithActionsRemaining = actionsRemaining;
+    }
+
+    public boolean crewWithActions() {
+
+        return this.crewWithActionsRemaining.size() > 0;
+    }
+
+    public void resetCrewActions() {
+        for(CrewMember member : this.crewMemberList) {
+            member.setActionsRemaining(2);
+        }
+
+        this.crewWithActionsRemaining = (ArrayList<CrewMember>) this.crewMemberList.clone();
+
+        System.out.println("Crew members now have 2 actions remaining");
+    }
+
+    public String getShipStatus() {
+
+        return this.theShip.toString();
+    }
+
+    public void useItem(CrewMember member) {
+        if(this.ownedItems.size() > 0) {
+            Item item = this.chooseItem();
+            item.useItem(member);
+            member.performAction();
+            this.ownedItems.remove(item); // could possibly remove in chooseItem()
+        } else {
+            System.out.println("You have no items!");
+        }
+
+    }
+
+    public Item chooseItem() {
+        Scanner scanner = new Scanner(System.in);
+        String items = "Which crew member to perform this action: \n";
+        for (int i = 0; i < this.ownedItems.size(); i++) {
+            items += String.format("%d. %s\n", i, this.ownedItems.get(i).getName());
+        }
+        System.out.println(items);
+        int index = scanner.nextInt();
+
+        //scanner.close();
+        return ownedItems.get(index);
     }
 
     public String getName() {
@@ -123,6 +188,11 @@ public class Crew {
     public void setPiecesFound(int piecesFound) {
         this.piecesFound = piecesFound;
     }
+
+//    @Override
+//    public String toString() {
+//
+//    }
 
 
 }
