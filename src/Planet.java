@@ -3,15 +3,27 @@ import java.util.Random;
 
 public class Planet {
 
-    String name = "Earth";
+    String name;
     private boolean partFound = false;
-    private ArrayList<String> itemsOnPlanet = new ArrayList();
+    private ArrayList<Item> itemsOnPlanet = new ArrayList<>();
 
-    public Planet() {
+    public Planet(String name) {
+        this.name = name;
+        generateItems();
     }
 
     public void generateItems() {
         System.out.println("Generating Items...");
+        Item apple = new Apple();
+        Item lesserHealing = new LesserHealing();
+        itemsOnPlanet.add(apple);
+        itemsOnPlanet.add(lesserHealing);
+        String printString = "";
+        for (Item item : itemsOnPlanet) {
+            printString += item.toString();
+            printString += "\n";
+        }
+        System.out.println(printString);
     }
 
     public String searchPlanet(CrewMember member) {
@@ -36,11 +48,11 @@ public class Planet {
         this.partFound = partFound;
     }
 
-    public ArrayList<String> getItemsOnPlanet() {
+    public ArrayList<Item> getItemsOnPlanet() {
         return itemsOnPlanet;
     }
 
-    public void setItemsOnPlanet(ArrayList<String> itemsOnPlanet) {
+    public void setItemsOnPlanet(ArrayList<Item> itemsOnPlanet) {
         this.itemsOnPlanet = itemsOnPlanet;
     }
 
@@ -50,5 +62,10 @@ public class Planet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String toString() {
+        String returnString = this.name;
+        return returnString;
     }
 }

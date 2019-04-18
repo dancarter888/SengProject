@@ -1,13 +1,13 @@
-public class FoodItem implements Item {
+public class MedicalItem implements Item {
 
     int cost;
     String name;
-    int hungerRestored;
+    int healthRestored;
 
-    public FoodItem(int cost, String name, int hungerRestored) {
+    public MedicalItem(int cost, String name, int healthRestored) {
         this.cost = cost;
         this.name = name;
-        this.hungerRestored = hungerRestored;
+        this.healthRestored = healthRestored;
     }
 
     @Override
@@ -22,13 +22,22 @@ public class FoodItem implements Item {
 
     @Override
     public String getDescription() {
+        String description = "Cures space plague";
+        if(name != "Plague Cure") {
+            description = String.format("Restores %d health", healthRestored);
+        }
 
-        return String.format("Restores %d hunger", hungerRestored);
+        return description;
     }
 
     @Override
     public void useItem(CrewMember member) {
-        member.increaseHunger(hungerRestored);
+        if(name == "Plague Cure") {
+            member.setHasPlague(false);
+        } else {
+            member.increaseHealth(healthRestored);
+        }
+
         System.out.println(String.format("%s item used...", name));
     }
 

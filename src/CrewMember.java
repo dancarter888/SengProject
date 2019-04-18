@@ -4,9 +4,9 @@ public class CrewMember {
 
     private String name;
     private int hunger = 100;
-    private int tiredness = 100; // maybe change tiredness to energy cause makes a bit more sense
+    private int tiredness = 0; // maybe change tiredness to energy cause makes a bit more sense
     private boolean hasPlague = false;
-    private int actionsRemaining = 1;
+    private int actionsRemaining = 2;
     private int health;
     private String searchingSkill;
 
@@ -34,7 +34,7 @@ public class CrewMember {
     }
 
     public void performAction() {
-        this.actionsRemaining--;
+        this.actionsRemaining --;
         System.out.println(String.format("%s now has %d actions remaining", this.name, this.actionsRemaining));
     }
 
@@ -44,7 +44,7 @@ public class CrewMember {
 
     public void setName() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter crew member name: \n");
+        System.out.println("Enter crew member name:");
         this.name = scanner.nextLine();
     }
 
@@ -81,6 +81,7 @@ public class CrewMember {
     public void setTiredness(int tiredness) {
         this.tiredness = tiredness;
     }
+
     public int getHealth() {
         return health;
     }
@@ -115,7 +116,6 @@ public class CrewMember {
 
     @Override
     public String toString() {
-
         return String.format("Name: %s, Hunger: %d, Tiredness: %d, Health: %d", this.name, this.hunger,
                             this.tiredness, this.health);
     }

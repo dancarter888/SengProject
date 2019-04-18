@@ -17,7 +17,6 @@ public class Crew {
         this.name = name;
         this.crewSize = numberOfCrew;
         this.createCrew(numberOfCrew);
-        System.out.println("Crew: " + crewMemberList.toString());
         this.crewWithActionsRemaining = (ArrayList<CrewMember>) crewMemberList.clone();
         this.theShip = new Ship();
 
@@ -32,28 +31,39 @@ public class Crew {
 
     public void createCrew(int numberOfCrew) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(String.format("Crew member options: \n1.Captain\n2.Engineer"));
-        for(int i=0; i<numberOfCrew; i++) {
+        int i = 1;
+        while (i < numberOfCrew + 1) {
             int classSelected = 0;
             do {
-                System.out.println(String.format("Crew member no. %d: ", i+1));
+                System.out.println(String.format("Crew member options for " + name + ": \n1.Captain\n2.Engineer"));
+                System.out.println(String.format("Choose crew member no. %d: ", i));
                 if(scanner.hasNextInt()) {
                     classSelected = scanner.nextInt();
+                    scanner.nextLine(); // Clears input from scanner
+                    if (classSelected < 1 || classSelected > 2) {
+                        System.out.println("You entered " + classSelected + ". Enter an Int between 1 and 2");
+                    } else {
+                        i ++;
+                    }
+                } else if(scanner.hasNext()) {
+                    String string = scanner.nextLine();
+                    System.out.println("You entered " + string + ". Enter an Int between 1 and 2");
                 }
             } while(classSelected == 0);
 
-            System.out.println("Adding crew...");
+
             switch (classSelected) {
                 case 1:
                     Captain newCaptain = new Captain();
+                    System.out.println("Added Captain " + newCaptain.getName());
                     this.crewMemberList.add(newCaptain);
                     break;
                 case 2:
                     Engineer newEngineer = new Engineer();
+                    System.out.println("Added Engineer "  + newEngineer.getName());
                     this.crewMemberList.add(newEngineer);
                     break;
                 default:
-                    System.out.println("not 1 or 2");
                     break;
             }
         }
@@ -189,10 +199,17 @@ public class Crew {
         this.piecesFound = piecesFound;
     }
 
-//    @Override
-//    public String toString() {
-//
-//    }
+    public void printCrew() {
+        String printString = "Crew named " + name + ":\n";
+        int i = 0;
+            for (CrewMember member : crewMemberList) {
+                i ++;
+                printString += i + ". ";
+                printString += member.toString();
+                printString += "\n";
+            }
+        System.out.println(printString);
+    }
 
 
 }

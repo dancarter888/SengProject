@@ -8,7 +8,7 @@ public class Ship {
 
     public Ship() {
         this.name = this.setName();
-        this.location = new Planet();
+        this.location = new StartPlanet();
     }
 
     public String getName() {
@@ -17,7 +17,6 @@ public class Ship {
 
     private String setName() {
         Scanner scanner = new Scanner(System.in);
-        String name = "";
         do {
             System.out.println("Ship name?");
             name = scanner.nextLine();
@@ -67,7 +66,6 @@ public class Ship {
     }
 
     public String toString() {
-
         return String.format("Name: %s, Shields: %d, Location: %s", this.name, this.shields, this.location); // need location string not just the object
     }
 
