@@ -1,24 +1,43 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Planet {
 
-    String name = "Earth";
+    String name;
     private boolean partFound = false;
-    private ArrayList<String> itemsOnPlanet = new ArrayList();
+    private ArrayList<Item> itemsOnPlanet = new ArrayList<>();
+    private ArrayList<Item> allItems;
+    private OutPost outPost = new OutPost();
 
-    public Planet() {
+    public Planet(String name) {
+        this.name = name;
+        this.allItems = outPost.getAllItems();
+        generateItems();
     }
 
-    public void generateItems() {
-        System.out.println("Generating Items...");
+    public void generateItems() { // This needs to randomise
+        System.out.println("Generating Items For " +  this.name + "...");
+        for (Item item : this.allItems) {
+            itemsOnPlanet.add(item);
+            System.out.println(item + "\n");
+        }
     }
 
-    public void searchPlanet() {
+    public String searchPlanet(CrewMember member) {
+        // Change when ge items working
         //returns item
+        Random rand = new Random();
+        int number = rand.nextInt(2);
         System.out.println("Searching planet...");
+        String itemFound = null;
+        if(number == 1) {
+            itemFound = "Found item";
+        }
+
+        return itemFound;
     }
 
-    public boolean isPartFound() {
+    public boolean getPartFound() {
         return partFound;
     }
 
@@ -26,11 +45,11 @@ public class Planet {
         this.partFound = partFound;
     }
 
-    public ArrayList<String> getItemsOnPlanet() {
+    public ArrayList<Item> getItemsOnPlanet() {
         return itemsOnPlanet;
     }
 
-    public void setItemsOnPlanet(ArrayList<String> itemsOnPlanet) {
+    public void setItemsOnPlanet(ArrayList<Item> itemsOnPlanet) {
         this.itemsOnPlanet = itemsOnPlanet;
     }
 
@@ -40,5 +59,14 @@ public class Planet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public OutPost getOutPost() {
+        return this.outPost;
+    }
+
+    public String toString() {
+        String returnString = this.name;
+        return returnString;
     }
 }
