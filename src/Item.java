@@ -3,6 +3,6 @@ public interface Item {
     int getCost();
     String getName();
     String getDescription();
-    void useItem();
-
+    void useItem(CrewMember member);
+    String toString();
 }
