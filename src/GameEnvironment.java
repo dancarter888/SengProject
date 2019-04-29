@@ -1,5 +1,3 @@
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -355,7 +353,12 @@ public class GameEnvironment {
                 alienPirates();
                 break;
             case 1:
-                spacePlague();
+                if (this.crew.getCrewMemberList().size() > this.crew.getCrewWithSpacePlague().size()) {
+                    spacePlague();
+                }
+                else {
+                    alienPirates();
+                }
                 break;
         }
     }
@@ -369,15 +372,19 @@ public class GameEnvironment {
     }
 
     public void spacePlague() { //Change this to use members with plague list instead of crewMemberList
+        boolean allInfected = false;
         Random rand = new Random();
         int amountInfected = rand.nextInt(this.numberOfCrew) + 1;
         for (int i = 0; i < amountInfected + 1; i++) {
             int memberInfectedIndex = rand.nextInt(this.numberOfCrew);
             CrewMember memberInfected = this.crew.getCrewMemberList().get(memberInfectedIndex);
-            while (this.crew.getCrewWithSpacePlague().contains(memberInfected)) {
+            while (this.crew.getCrewWithSpacePlague().contains(memberInfected) && !allInfected) {
                 memberInfectedIndex = rand.nextInt(this.numberOfCrew);
                 memberInfected = this.crew.getCrewMemberList().get(memberInfectedIndex);
                 memberInfected.setHasPlague(true);
+                if (this.crew.getCrewMemberList().size() > this.crew.getCrewWithSpacePlague().size()) {
+                    allInfected = true;
+                }
             }
             this.crew.getCrewWithSpacePlague().add(memberInfected);
             System.out.println(memberInfected.getName() + " has been infected with Space Plague");
